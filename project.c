@@ -1,13 +1,10 @@
 #include <stdio.h>
 int main()
 {
-    int opr;
-    int prize=0;
-    int total=0;
-    int count=0;
+    int choice, total = 0;
+    int coffee = 0, tea = 0, juice = 0, pizza = 0;
+    int payment, change;
 
-    int prizes[100];
-    char *items[100];
     printf("-----------Welcome to the Cafe!---------------\n");
     do
     { 
@@ -17,69 +14,79 @@ int main()
     printf("4. Pizza    - Rs 99\n");
     printf("5. Exit\n");  
     printf("Enter your choice : ");
-    scanf("%d", &opr);
+    scanf("%d", &choice);
 
-    switch (opr)
+    switch (choice)
     {
         case 1:
+            coffee++;
+            total += 25;
             printf("You have selected Coffee\n");
-            prize = 25;
-            if (count < 100) 
-            {
-                items[count] = "Coffee";
-            }
             break;
         case 2:
+            tea++;
+            total += 15;
             printf("You have selected Tea\n");
-            prize = 15;
-            if (count < 100) 
-            {
-                items[count] = "Tea";
-            }
             break;
         case 3:
+            juice++;
+            total += 40;
             printf("You have selected Juice\n");
-            prize = 40;
-            if (count < 100) 
-            {
-                items[count] = "Juice";
-            }
             break;
         case 4:
+            pizza++;
+            total += 99;
             printf("You have selected Pizza\n");
-            prize = 99;
-            if (count < 100) 
-            {
-                items[count] = "Pizza";
-            }
             break;
         case 5:
-            printf("You have selected Exit\n");
-            break;
-        default:
-            printf("Invalid choice\n");
-    }
-    if(opr>=1 && opr<=4)
-    {
-        if (count < 100) 
-        {
-            prizes[count] = prize;
-            count++;
-            total += prize;
+            printf("\n------ YOUR BILL ------\n");
+
+            if(coffee > 0)
+            printf("Coffee x %d = Rs %d\n", coffee, coffee * 25);
+
+            if(tea > 0)
+            printf("Tea x %d = Rs %d\n", tea, tea * 15);
+
+            if(juice > 0)
+            printf("Juice x %d = Rs %d\n", juice, juice * 40);
+
+            if(pizza>0)
+            printf("Pizza x %d = Rs %d\n", pizza, pizza * 99);
+
+            printf("----------------------\n");
+            printf("Total Bill = Rs %d\n", total);
+
+            if(total == 0)
+            {
+                printf("No items selected!\n");
+                    break;
+            }
+
+            do
+            {
+                printf("Enter payment amount: ");
+                scanf("%d", &payment);
+
+                if(payment < total)
+                {
+                    printf("Insufficient payment!\n");
+                    printf("Please pay Rs %d\n", total);
+                }
+
+                } while(payment < total);
+
+                change = payment - total;
+
+                printf("Payment Successful!\n");
+                printf("Change = Rs %d\n", change);
+                printf("Thank you! Visit Again.\n");
+                break;
+
+            default:
+                printf("Invalid choice!\n");
         }
-        else
-        {
-            printf("Maximum item limit reached. Cannot add more items.\n");
-        }
-    }
-    } while (opr != 5);
-    printf("\n--------- YOUR ORDER ---------\n");
-    for (int i = 0; i < count; i++)
-    {
-        printf("%s - Rs %d\n", items[i], prizes[i]);
-    }
-    printf("\n--------- YOUR ORDER ---------\n");
-    printf("Total amount to be paid: Rs %d\n", total);
-    printf("Thank you for visiting the Cafe!\n");
+
+    } while(choice != 5);
+
     return 0;
 }

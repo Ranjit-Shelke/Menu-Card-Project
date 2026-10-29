@@ -1,6 +1,6 @@
 /*
 Name: Ranjit Shelke
-Date: 28/10/2026
+Date: 29/10/2026
 Description: Menu Card
 */
 
@@ -9,7 +9,7 @@ int main()
 {
     int choice, total = 0;
     int coffee = 0, tea = 0, juice = 0, pizza = 0;
-    int payment, change;
+    int payment;
 
     printf("-----------Welcome to the Cafe!---------------\n");
     do
@@ -26,22 +26,22 @@ int main()
     {
         case 1:
             coffee++;
-            total += 25;
+            total = total + 25;
             printf("You have selected Coffee\n");
             break;
         case 2:
             tea++;
-            total += 15;
+            total = total + 15;
             printf("You have selected Tea\n");
             break;
         case 3:
             juice++;
-            total += 40;
+            total = total + 40;
             printf("You have selected Juice\n");
             break;
         case 4:
             pizza++;
-            total += 99;
+            total = total + 99;
             printf("You have selected Pizza\n");
             break;
         case 5:
@@ -60,31 +60,31 @@ int main()
             printf("Pizza x %d = Rs %d\n", pizza, pizza * 99);
 
             printf("----------------------\n");
-            printf("Total Bill = Rs %d\n", total);
+            printf("Total Bill = Rs %d\n\n", total);
 
             if(total == 0)
             {
                 printf("No items selected!\n");
                     break;
             }
-
+            
             do
             {
-                printf("Enter payment amount: ");
+                printf("Please Select a Payment Method :\n1. UPI\n2. Cash\n");
                 scanf("%d", &payment);
 
-                if(payment < total)
+                switch (payment)
                 {
-                    printf("Insufficient payment!\n");
-                    printf("Please pay Rs %d\n", total);
+                case 1: printf("You Select UPI\n");
+                    break;
+                case 2: printf("You Select Cash\n");
+                    break;
+                
+                default: printf("select a valid option\n");
+                    break;
                 }
-
-                } while(payment < total);
-
-                change = payment - total;
-
-                printf("Payment Successful!\n");
-                printf("Change = Rs %d\n", change);
+            } while (payment != 1 && payment != 2);
+            
                 printf("Thank you! Visit Again.\n");
                 break;
 
